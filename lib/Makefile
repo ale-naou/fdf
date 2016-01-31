@@ -6,7 +6,7 @@
 #    By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/30 14:16:11 by ale-naou          #+#    #+#              #
-#    Updated: 2016/01/31 13:02:20 by ale-naou         ###   ########.fr        #
+#    Updated: 2016/01/31 16:48:19 by ale-naou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,14 @@ $(NAME) : $(OBJ)
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-	@printf "%-.30s %s" "$< .............................." && \
+	@#printf "%-.30s %s" "$< .............................." && \
 	echo "[\033[1;32mOK\033[0m]"
 
 clean :
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
 
 fclean : clean
-	rm -fv $(NAME)
+	@rm -fv $(NAME)
 
 re : fclean all
 

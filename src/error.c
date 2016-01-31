@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 13:38:39 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/01/31 16:38:22 by ale-naou         ###   ########.fr       */
+/*   Created: 2016/01/31 13:37:42 by ale-naou          #+#    #+#             */
+/*   Updated: 2016/01/31 21:06:42 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-void	ft_putchar(char c)
+void	error(int c)
 {
-	write(1, &c, 1);
+	if (c == 1)
+		ft_putendl("Give me Something ...");
+	if (c == 2)
+		ft_putendl("I cant handle this much !");
+	if (c == 3)
+		ft_putendl("openfd() failed");
+	if (c == 4)
+		ft_putendl("closefd() failed");
+	if (c == 5)
+		ft_putendl("Alloc failed");
+	exit(1);
 }
