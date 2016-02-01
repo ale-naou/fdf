@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/01 15:26:14 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/01 17:06:41 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*split(t_env *e, char *line)
 	return (e->tmp);
 }
 
-static void	strsplitint(char *line, t_env *e)
+static void	strsplitint(t_env *e, char *line)
 {
 	int		i;
 
@@ -88,5 +88,5 @@ void		parsing(t_env *e, char *av)
 	if (!(e->p.tabz = (int *)malloc(sizeof(int) * e->p.lenmax)))
 		error(5);
 	while ((e->ret = ft_get_next_line(e->fd, &e->line)) == 1)
-		strsplitint(e->line, e);
+		strsplitint(e, e->line);
 }

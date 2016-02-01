@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:37:42 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/01/31 21:06:42 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/01 20:16:32 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ void	error(int c)
 		ft_putendl("closefd() failed");
 	if (c == 5)
 		ft_putendl("Alloc failed");
+	if (c == 6)
+		ft_putendl("e->img.adr not created");
+	if (c == 7)
+		ft_putendl("e->img.img not created");
 	exit(1);
 }

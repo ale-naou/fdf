@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/01 15:26:19 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/01 21:06:30 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,37 @@ typedef struct		s_img
 	int				sl;
 	int				bpp;
 	int				opp;
-	int				endian;	
+	int				endian;
 }					t_img;
 
 typedef struct		s_env
 {
 	int				i;
 	int				imax;
+	int				inc; //
 	int				is;
 	int				il;
 	int				fd;
 	int				ret;
 	int				x;
 	int				y;
+	int				winx;
+	int				winy;
+	int				orix;
+	int				oriy;
 	char			*line;
 	char			*tmp;
 	void			*mlx;
 	void			*win;
 	t_pars			p;
-	t_img			i: 
+	t_img			img; 
 }					t_env;
 
 
 void		error(int c);
 void		parsing(t_env *v, char *av);
+void		draw(t_env *e);
+void		img_init(t_env *e);
+void		img_pixel_put(t_env *e, int x, int y, int color);
 
 #endif
