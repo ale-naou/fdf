@@ -6,25 +6,21 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/01/31 21:06:47 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/01 15:26:14 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static char	*prout(t_env *e, char *line)
+static char	*split(t_env *e, char *line)
 {
 	int		i;
 	
-	i = 0;
-	if (line[e->il] == ' ')
+	i = -1;
+	while (line[e->il] == ' ')
 		e->il++;
 	while (line[e->il] != ' ' && line[e->il] != '\0')
-	{
-		e->tmp[i] = line[e->il];
-		i++;
-		e->il++;
-	}
+		e->tmp[++i] = line[e->il++];
 	e->tmp[i] = '\0';
 	return (e->tmp);
 }
@@ -33,19 +29,10 @@ static void	strsplitint(char *line, t_env *e)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	e->il = 0;
-	while (i < e->p.lenx)
-	{
-		e->p.tabz[e->is] = ft_atoi(prout(e, line));
-		ft_putnbr(e->p.tabz[e->is]);
-		ft_putchar(' ');
-		e->is++;
-		i++;
-	}
-	ft_putchar('\n');
-	ft_putnbr(e->il);
-	ft_putchar('\n');
+	while (++i < e->p.lenx)
+		e->p.tabz[e->is++] = ft_atoi(split(e, line));
 }
 
 static int	str_len(char *line)
@@ -88,11 +75,6 @@ static int	first_read(t_env *e, char *av)
 
 void		parsing(t_env *e, char *av)
 {
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
 	e->fd = 0;
 	e->ret = 0;
 	e->i = 0;
