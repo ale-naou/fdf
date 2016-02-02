@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/01 21:06:35 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/02 14:55:37 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,37 @@ static void	draw_line(t_env *e)
 	int		c;
 	int		m;
 
-	dh = (e->x + 1) - e->x;
-	dl = (e->y + 1) - e->y;
+	dh = e->tmpx2 - e->tmpx;
+	dl = e->tmpy2 - e->tmpy;
 	c = -1;
 	m = abs(dh) > abs(dl) ? abs(dh) : abs (dl);
 	while (++c < m)
-		img_pixel_put(e, e->orix + e->x * 10 + (c * dh) / m, 
-						e->oriy + e->y * 10 + (c * dl) / m, 0xFF0000);
+		img_pixel_put(e, e->orix + e->tmpx + (c * dh) / m, 
+						e->oriy + e->tmpy + (c * dl) / m, 0xFF0000);
 }
 
 void		draw(t_env *e)
 {
-	int i;
-
-	i = 0;
-	e->y = 0;
 	e->inc = 0;
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->winx, e->winy, "fdf");
-	while (i + 1 < e->p.lenmax)
+	while (e->inc + 1 < e->p.lenmax)
 	{
-		e->x = 0;
-		while (e->x < e->p.lenx)
+		e->tmpx = e->a[e->inc]->x * 20;
+		e->tmpy = e->a[e->inc]->y * 20;
+//		ft_putstr("e->a[i]->x :");
+//		ft_putnbr(e->a[i]->x);
+//		ft_putstr(",	");
+//		ft_putstr("e->a[i]->y :");
+//		ft_putnbr(e->a[i]->y);
+//		ft_putstr("\n");
+		if (e->a[e->inc]->y == e->a[e->inc + 1]->y)
 		{
-			draw_line(e);
-			e->x = e->x + 1;
-			i++;
+			e->tmpx2 = e->a[e->inc + 1]->x * 20;
+			e->tmpy2 = e->a[e->inc + 1]->y * 20;
+			draw_line(e); 
 		}
-		e->y = e->y + 1;
+		e->inc++;
 	}
 	mlx_put_image_to_window(e->mlx, e->win, e->img.adr, 0, 0);
 	mlx_loop(e->mlx);

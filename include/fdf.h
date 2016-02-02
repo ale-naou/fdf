@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/01 21:06:30 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/02 14:32:49 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,18 @@
 # include <math.h>
 # include <stdio.h> //
 
+typedef struct		s_axis
+{
+	int				x;
+	int				y;
+	int				h;
+}					t_axis;
+
 typedef struct		s_pars
 {
 	int				lenx;
 	int				leny;
 	int				lenmax;
-	int				*tabz;
 }					t_pars;
 
 typedef struct		s_img
@@ -42,8 +48,6 @@ typedef struct		s_env
 	int				i;
 	int				imax;
 	int				inc; //
-	int				is;
-	int				il;
 	int				fd;
 	int				ret;
 	int				x;
@@ -52,10 +56,16 @@ typedef struct		s_env
 	int				winy;
 	int				orix;
 	int				oriy;
+	int				tmpx;
+	int				tmpy;
+	int				tmpx2;
+	int				tmpy2;
 	char			*line;
+	char			**tab;
 	char			*tmp;
 	void			*mlx;
 	void			*win;
+	t_axis			**a;
 	t_pars			p;
 	t_img			img; 
 }					t_env;

@@ -6,36 +6,26 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/01 17:06:41 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/02 14:31:10 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static char	*split(t_env *e, char *line)
+static t_axis	*new_point(t_env *e, char *tab)
 {
-	int		i;
+	t_axis *new;
 	
-	i = -1;
-	while (line[e->il] == ' ')
-		e->il++;
-	while (line[e->il] != ' ' && line[e->il] != '\0')
-		e->tmp[++i] = line[e->il++];
-	e->tmp[i] = '\0';
-	return (e->tmp);
+	if (!(new = (t_axis *)malloc(sizeof(t_axis))))
+		return (NULL);
+	new->x = e->x;
+	new->y = e->y;
+	new->h = ft_atoi(tab);
+	ft_strdel(&tab);
+	return (new);
 }
 
-static void	strsplitint(t_env *e, char *line)
-{
-	int		i;
-
-	i = -1;
-	e->il = 0;
-	while (++i < e->p.lenx)
-		e->p.tabz[e->is++] = ft_atoi(split(e, line));
-}
-
-static int	str_len(char *line)
+static int		str_len(char *line)
 {
 	int		i;
 	int		len;
@@ -52,7 +42,7 @@ static int	str_len(char *line)
 	return (len);
 }
 
-static int	first_read(t_env *e, char *av)
+static int		first_read(t_env *e, char *av)
 {
 	e->fd = 0;
 	e->ret = 0;
@@ -73,20 +63,28 @@ static int	first_read(t_env *e, char *av)
 	return (e->imax * e->p.leny);
 }
 
-void		parsing(t_env *e, char *av)
+void			parsing(t_env *e, char *av)
 {
 	e->fd = 0;
 	e->ret = 0;
-	e->i = 0;
-	e->is = 0;
 	e->p.lenmax = first_read(e, av);
 	e->p.lenx = e->p.lenmax / e->p.leny;
 	if ((e->fd = open(av, O_RDWR)) == -1)
 		error(3);
-	if (!(e->tmp = (char *)malloc(sizeof(char) * 8)))
+	if (!(e->a = (t_axis **)malloc(sizeof(t_axis *) * e->p.lenmax)))
 		error(5);
-	if (!(e->p.tabz = (int *)malloc(sizeof(int) * e->p.lenmax)))
-		error(5);
+	e->y = 0;
+	e->i = 0;
 	while ((e->ret = ft_get_next_line(e->fd, &e->line)) == 1)
-		strsplitint(e, e->line);
+	{
+		e->tab = ft_strsplit(e->line, ' ');
+		e->x = -1;
+		while (e->tab[++e->x] != NULL)
+			e->a[e->i++] = new_point(e, e->tab[e->x]);
+		e->y++;
+		free(e->tab);
+		e->tab = NULL;
+	}
+	if (close(e->fd) == -1)
+		error(4);	
 }

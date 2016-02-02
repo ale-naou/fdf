@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 11:08:44 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/01/31 12:56:11 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/02 11:40:30 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ char		**ft_strsplit(const char *s, char c)
 		}
 		i++;
 	}
-	tab[j] = 0;
+	tab[j] = NULL;
 	return (tab);
 }
