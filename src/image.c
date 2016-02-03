@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 15:24:51 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/02 14:56:47 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/03 17:19:46 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	img_pixel_put(t_env *e, int x, int y, int color)
 
 void	img_init(t_env *e)
 {
-	if (!(e->img.adr = mlx_new_image(e->mlx, 1000, 1000)))
+	if (!(e->img.adr = mlx_new_image(e->mlx, e->winx, e->winy)))
 		error(6);
 	if (!(e->img.img = mlx_get_data_addr(e->img.adr, &e->img.bpp, &e->img.sl,
 			&e->img.endian)))

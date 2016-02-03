@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/02 14:56:44 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/03 16:39:30 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,18 @@ static void	draw_line(t_env *e)
 void		draw(t_env *e)
 {
 	e->inc = 0;
-	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, e->winx, e->winy, "fdf");
 	while (e->inc + 1 < e->p.lenmax)
 	{
-		e->tmpx = e->a[e->inc]->x * 20;
-		e->tmpy = e->a[e->inc]->y * 20;
-//		ft_putstr("e->a[i]->x :");
-//		ft_putnbr(e->a[i]->x);
-//		ft_putstr(",	");
-//		ft_putstr("e->a[i]->y :");
-//		ft_putnbr(e->a[i]->y);
-//		ft_putstr("\n");
+		iso_init(e);
 		if (e->a[e->inc]->y == e->a[e->inc + 1]->y)
 		{
-			e->tmpx2 = e->a[e->inc + 1]->x * 20;
-			e->tmpy2 = e->a[e->inc + 1]->y * 20;
+			iso_converth(e);
 			draw_line(e); 
+		}
+		if (e->inc + e->p.lenx + 1 <= e->p.lenmax)
+		{
+			iso_convertv(e);
+			draw_line(e);
 		}
 		e->inc++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/02 14:32:49 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/03 16:15:37 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ typedef struct		s_pars
 	int				leny;
 	int				lenmax;
 }					t_pars;
+
+typedef struct		s_infos
+{
+	int				scale;
+}					t_infos;
 
 typedef struct		s_img
 {
@@ -67,7 +72,8 @@ typedef struct		s_env
 	void			*win;
 	t_axis			**a;
 	t_pars			p;
-	t_img			img; 
+	t_img			img;
+	t_infos			inf;
 }					t_env;
 
 
@@ -76,5 +82,8 @@ void		parsing(t_env *v, char *av);
 void		draw(t_env *e);
 void		img_init(t_env *e);
 void		img_pixel_put(t_env *e, int x, int y, int color);
+void		iso_init(t_env *e);
+void		iso_converth(t_env *e);
+void		iso_convertv(t_env *e);
 
 #endif
