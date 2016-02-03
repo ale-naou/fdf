@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/03 16:15:37 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/03 20:26:47 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct		s_axis
 {
 	int				x;
 	int				y;
-	int				h;
+	int				z;
 }					t_axis;
 
 typedef struct		s_pars
@@ -36,6 +36,7 @@ typedef struct		s_pars
 typedef struct		s_infos
 {
 	int				scale;
+	int				h;
 }					t_infos;
 
 typedef struct		s_img
@@ -85,5 +86,6 @@ void		img_pixel_put(t_env *e, int x, int y, int color);
 void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);
+int			keyfnc(int key, t_env *e);
 
 #endif

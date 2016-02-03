@@ -6,7 +6,7 @@
 #    By: ale-naou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 12:43:22 by ale-naou          #+#    #+#              #
-#    Updated: 2016/02/03 16:12:40 by ale-naou         ###   ########.fr        #
+#    Updated: 2016/02/03 19:59:02 by ale-naou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS		= -Wall -Werror	-Wextra
 MLXFLAGS	= -L/usr/local/lib/ -I/usr/local/include \
 			  -lmlx -framework OpenGL -framework AppKit
 
-SRC_NAME	= main.c parsing.c image.c isoconverter.c draw.c error.c
+SRC_NAME	= main.c parsing.c image.c isoconverter.c draw.c keyfnc.c error.c
 OBJ_NAME	= $(SRC_NAME.c=.o)
 LIB_NAME	= libft.a
 

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/03 15:48:07 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/03 18:26:56 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_axis	*new_point(t_env *e, char *tab)
 		return (NULL);
 	new->x = e->x;
 	new->y = e->y;
-	new->h = ft_atoi(tab);
+	new->z = ft_atoi(tab);
 	ft_strdel(&tab);
 	return (new);
 }
