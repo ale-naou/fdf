@@ -6,11 +6,34 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 13:29:02 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 21:30:13 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	optionsdisplay(t_env *e)
+{
+	int		x;
+	int		y;
+
+	x = e->winx / 50;
+	y = e->winy / 50;
+	if ((e->inf.show % 2) == 0)
+		mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, 
+					"Use [o] to show options");
+	else
+	{
+		mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, 
+				"Use [arrows]       to move map");
+		mlx_string_put(e->mlx, e->win, x, y + 20, 0xFFFFFF, 
+				"Use [+] [-]        to zoom in / zoom out");
+		mlx_string_put(e->mlx, e->win, x, y + 40, 0xFFFFFF, 
+				"Use [pgup] [pgdwn] to increase / decrease altitude");
+		mlx_string_put(e->mlx, e->win, x, y + 60, 0xFFFFFF, 
+				"Use [4] [6]        to change inclination");
+	}
+}
 
 static void	draw_line(t_env *e)
 {
@@ -49,5 +72,6 @@ void		draw(t_env *e)
 	}
 	mlx_hook(e->win, 2, 1, keyfnc, e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.adr, 0, 0);
+	optionsdisplay(e);
 	mlx_loop(e->mlx);
 }

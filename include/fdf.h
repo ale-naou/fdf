@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 18:24:05 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 21:30:15 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 typedef struct		s_axis
 {
-	int				x;
-	int				y;
-	int				z;
+	float			x;
+	float			y;
+	float			z;
 }					t_axis;
 
 typedef struct		s_pars
@@ -35,8 +35,9 @@ typedef struct		s_pars
 
 typedef struct		s_infos
 {
-	int				scale;
-	int				h;
+	float			scale;
+	float			h;
+	int				show;
 }					t_infos;
 
 typedef struct		s_img
@@ -53,7 +54,7 @@ typedef struct		s_reset
 {
 	int				xres;
 	int				yres;
-	int				hres;
+	float			hres;
 	int				scaleres;
 	int				divres;
 
@@ -76,7 +77,7 @@ typedef struct		s_env
 	int				tmpy;
 	int				tmpx2;
 	int				tmpy2;
-	int				div;
+	float			div;
 	char			*line;
 	char			**tab;
 	char			*tmp;
@@ -99,6 +100,7 @@ void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);
 void		backup(t_env *e);
+void		optionsdisplay(t_env *e);
 int			keyfnc(int key, t_env *e);
 
 #endif

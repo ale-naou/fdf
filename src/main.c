@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 18:10:26 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 21:23:57 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int		main(int ac, char **av)
 	e.winy = 1440;
 	e.orix = 250;
 	e.oriy = 50;
-	e.inf.scale = 25;
-	e.inf.h = 10;
+	e.inf.scale = 10;
+	e.inf.h = 0.2;
 	e.div = 2;
+	e.inf.show = 0;
 	if (ac != 2)
 	{
 		ac == 1 ? error(1) : error(2);

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:09:45 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 18:24:01 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 21:30:17 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void scale(int key, t_env *e)
 	if (e->inf.scale > 1)
 		e->inf.scale = key == 78 ? e->inf.scale - 1 : e->inf.scale;
 	e->inf.scale = key == 69 ? e->inf.scale + 1 : e->inf.scale;
-	e->inf.h = key == 121 ? e->inf.h + 1 : e->inf.h;
-	e->inf.h = key == 116 ? e->inf.h - 1 : e->inf.h;
+	e->inf.h = key == 121 ? e->inf.h + 0.2 : e->inf.h;
+	e->inf.h = key == 116 ? e->inf.h - 0.2 : e->inf.h;
 }
 
 static void	move(int key, t_env *e)
@@ -43,14 +43,16 @@ static void	reset(t_env *e)
 
 int		keyfnc(int key, t_env *e)
 {
+	printf("%d", key);
+	if (key == 31)
+		e->inf.show++;
 	if (key == 53)
 		exit (0);
 	if ((key >= 123 && key <= 126) || key == 86 || key == 88)
 		move(key, e);
 	if (key == 69 || key == 78 || key == 121 || key == 116)
 		scale(key, e);
-	printf("%d", key);
-		if (key == 115)
+	if (key == 115)
 		reset(e);
 	mlx_destroy_image(e->mlx, e->img.adr);
 	draw(e);
