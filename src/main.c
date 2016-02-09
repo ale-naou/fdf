@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 14:03:06 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 18:10:26 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 int		main(int ac, char **av)
 {
 	t_env	e;
-	e.winx = 1000;
-	e.winy = 600;
+	e.winx = 2560;
+	e.winy = 1440;
 	e.orix = 250;
 	e.oriy = 50;
 	e.inf.scale = 25;
 	e.inf.h = 10;
+	e.div = 2;
 	if (ac != 2)
 	{
 		ac == 1 ? error(1) : error(2);

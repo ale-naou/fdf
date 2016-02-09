@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 14:03:46 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 18:24:05 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_reset
 	int				yres;
 	int				hres;
 	int				scaleres;
+	int				divres;
 
 }					t_reset;
 
@@ -75,6 +76,7 @@ typedef struct		s_env
 	int				tmpy;
 	int				tmpx2;
 	int				tmpy2;
+	int				div;
 	char			*line;
 	char			**tab;
 	char			*tmp;
@@ -97,7 +99,6 @@ void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);
 void		backup(t_env *e);
-void		reset(t_env *e);
 int			keyfnc(int key, t_env *e);
 
 #endif
