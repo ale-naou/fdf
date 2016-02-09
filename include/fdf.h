@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/03 20:26:47 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/09 14:03:46 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ typedef struct		s_img
 	int				endian;
 }					t_img;
 
+typedef struct		s_reset
+{
+	int				xres;
+	int				yres;
+	int				hres;
+	int				scaleres;
+
+}					t_reset;
+
 typedef struct		s_env
 {
 	int				i;
@@ -75,6 +84,7 @@ typedef struct		s_env
 	t_pars			p;
 	t_img			img;
 	t_infos			inf;
+	t_reset			res;
 }					t_env;
 
 
@@ -86,6 +96,8 @@ void		img_pixel_put(t_env *e, int x, int y, int color);
 void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);
+void		backup(t_env *e);
+void		reset(t_env *e);
 int			keyfnc(int key, t_env *e);
 
 #endif
