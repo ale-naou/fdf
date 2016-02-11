@@ -1,69 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_strsplit.c                                       :+:      :+:    :+:   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 11:08:44 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/02 11:40:30 by ale-naou         ###   ########.fr       */
+/*   Created: 2016/02/11 13:31:41 by ale-naou          #+#    #+#             */
+/*   Updated: 2016/02/11 13:32:05 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_firstcharacs(const char *s, char c)
+static int	ft_wcount(char const *s, char c)
 {
-	size_t	i;
+	size_t	wc;
 
-	i = 0;
-	while (s[i] == c)
-		i++;
-	return (i);
-}
-
-static int	ft_wcount(const char *s, char c)
-{
-	size_t	i;
-	size_t	counter;
-
-	i = 0;
-	counter = 0;
-	if (s[i] == '\0' || (s[i] != c && i == 0))
-		counter++;
-	while (s[i] != '\0')
+	while (*s && *s == c)
+		s++;
+	wc = (*s ? 1 : 0);
+	while (*s)
 	{
-		i++;
-		if (s[i] != c && s[i - 1] == c)
-			counter++;
+		if (*s == c && s[1] && s[1] != c)
+			wc++;
+		s++;
 	}
-	return (counter);
+	return (wc);
 }
 
-char		**ft_strsplit(const char *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	size_t	wc;
+	char	*start;
 	char	**tab;
 
-	j = 0;
-	if (s == NULL || c == 0)
+	wc = ft_wcount((char*)s, c);
+	if (!(tab = (char**)malloc(sizeof(char*) * (wc + 1))))
 		return (NULL);
-	if ((tab = (char **)malloc(sizeof(s) * ft_wcount(s, c))) == NULL)
-		return (NULL);
-	i = ft_firstcharacs(s, c);
-	while (s[i] != '\0')
+	start = (char*)s;
+	while (*s)
 	{
-		if ((s[i] != c && s[i - 1] == c) || (s[i] != c && i == 0))
+		if (*s == c)
 		{
-			k = 0;
-			while (s[i + k] != c && s[i + k] != '\0')
-				k++;
-			tab[j++] = ft_strsub(s, i, k);
+			if (start != s)
+				*(tab++) = ft_strsub(start, 0, s - start);
+			start = (char*)s + 1;
 		}
-		i++;
+		s++;
 	}
-	tab[j] = NULL;
-	return (tab);
+	if (start != s)
+		*(tab++) = ft_strsub(start, 0, s - start);
+	*tab = NULL;
+	return (tab - wc);
 }

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 18:27:05 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 14:29:36 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ void			parsing(t_env *e, char *av)
 	{
 		e->tab = ft_strsplit(e->line, ' ');
 		e->x = -1;
-		while (e->tab[++e->x] != NULL)
+		while (++e->x < e->p.lenx)
 			e->a[e->i++] = new_point(e, e->tab[e->x]);
 		e->y++;
 		free(e->tab);
 		e->tab = NULL;
 	}
 	if (close(e->fd) == -1)
-		error(4);	
+		error(4);
 }

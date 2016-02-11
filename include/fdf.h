@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 21:30:15 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/10 19:15:27 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct		s_pars
 	int				lenx;
 	int				leny;
 	int				lenmax;
+	int				zmin;
+	int				zmax;
 }					t_pars;
 
 typedef struct		s_infos
@@ -71,8 +73,8 @@ typedef struct		s_env
 	int				y;
 	int				winx;
 	int				winy;
-	int				orix;
-	int				oriy;
+	float			orix;
+	float			oriy;
 	int				tmpx;
 	int				tmpy;
 	int				tmpx2;

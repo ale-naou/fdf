@@ -6,11 +6,28 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/09 21:30:13 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/10 20:58:01 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	valuesdisplay(t_env *e)
+{
+	int x;
+	int y;
+
+	x = e->winx - 150;
+	y = e->winy - 100;
+	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
+	mlx_string_put(e->mlx, e->win, x + 75, y, 0xFFFFFF, ft_itoa(e->orix));
+	mlx_string_put(e->mlx, e->win, x, y + 20, 0xFFFFFF, "oriy = ");
+	mlx_string_put(e->mlx, e->win, x + 75, y += 20, 0xFFFFFF, ft_itoa(e->oriy));
+//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
+//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
+//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
+//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
+}
 
 void	optionsdisplay(t_env *e)
 {
@@ -26,12 +43,13 @@ void	optionsdisplay(t_env *e)
 	{
 		mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, 
 				"Use [arrows]       to move map");
-		mlx_string_put(e->mlx, e->win, x, y + 20, 0xFFFFFF, 
+		mlx_string_put(e->mlx, e->win, x, y += 20, 0xFFFFFF, 
 				"Use [+] [-]        to zoom in / zoom out");
-		mlx_string_put(e->mlx, e->win, x, y + 40, 0xFFFFFF, 
+		mlx_string_put(e->mlx, e->win, x, y += 20, 0xFFFFFF, 
 				"Use [pgup] [pgdwn] to increase / decrease altitude");
-		mlx_string_put(e->mlx, e->win, x, y + 60, 0xFFFFFF, 
+		mlx_string_put(e->mlx, e->win, x, y += 20, 0xFFFFFF, 
 				"Use [4] [6]        to change inclination");
+		valuesdisplay(e);
 	}
 }
 
