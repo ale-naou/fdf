@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/10 19:15:27 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 17:01:38 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct		s_reset
 typedef struct		s_env
 {
 	int				i;
-	int				imax;
 	int				inc; //
 	int				fd;
 	int				ret;

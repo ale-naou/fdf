@@ -6,11 +6,20 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 14:29:35 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 17:01:34 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void init_env(t_env *e)
+{
+	e->fd = 0;
+	e->ret = 0;
+	e->i = 0;
+	e->y = 0;
+	e->inf.show = 0;
+}
 
 int		main(int ac, char **av)
 {
@@ -22,11 +31,11 @@ int		main(int ac, char **av)
 //	e.winy = 500;
 	e.inf.h = 0.2;
 	e.div = 2;
-	e.inf.show = 0;
 	if (ac != 2)
 	{
 		ac == 1 ? error(1) : error(2);
 	}
+	init_env(&e);
 	parsing(&e, av[1]);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, e.winx, e.winy, "fdf");

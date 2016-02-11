@@ -6,11 +6,20 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 14:29:36 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 16:30:39 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void		init_parser(t_env *e)
+{
+	e->p.lenx = 0;
+	e->p.leny = 0;
+	e->p.lenmax = 0;
+	e->p.zmin = 2147483647;
+	e->p.zmax = -2147483648;
+}
 
 static t_axis	*new_point(t_env *e, char *tab)
 {
@@ -21,6 +30,8 @@ static t_axis	*new_point(t_env *e, char *tab)
 	new->x = e->x;
 	new->y = e->y;
 	new->z = ft_atoi(tab);
+	e->p.zmin = (new->z < e->p.zmin ? new->z : e->p.zmin);		
+	e->p.zmax = (new->z > e->p.zmax ? new->z : e->p.zmax);
 	ft_strdel(&tab);
 	return (new);
 }
@@ -44,43 +55,45 @@ static int		str_len(char *line)
 
 static int		first_read(t_env *e, char *av)
 {
-	e->fd = 0;
-	e->ret = 0;
-	e->i = 0;
-	e->imax = 0;
-	e->p.leny = 0;
+	int		i;
+	int		imax;
+
+	i = 0;
+	imax = 0;
 	if ((e->fd = open(av, O_RDWR)) == -1)
 		error(3);
 	while ((e->ret = ft_get_next_line(e->fd, &e->line)) == 1)
 	{
-		e->i = str_len(e->line);
-		if (e->i > e->imax)
-			e->imax = e->i;
+		i = str_len(e->line);
+		if (i > imax)
+			imax = i;
 		e->p.leny++;
 	}
 	if (close(e->fd) == -1)
 		error(4);
-	return (e->imax * e->p.leny);
+	return (imax * e->p.leny);
 }
 
 void			parsing(t_env *e, char *av)
 {
-	e->fd = 0;
-	e->ret = 0;
+	int		i;
+
+	i = 0;
+	init_parser(e);
 	e->p.lenmax = first_read(e, av);
 	e->p.lenx = e->p.lenmax / e->p.leny;
+	e->fd = 0;
+	e->ret = 0;
 	if ((e->fd = open(av, O_RDWR)) == -1)
 		error(3);
 	if (!(e->a = (t_axis **)malloc(sizeof(t_axis *) * e->p.lenmax)))
 		error(5);
-	e->y = 0;
-	e->i = 0;
 	while ((e->ret = ft_get_next_line(e->fd, &e->line)) == 1)
 	{
 		e->tab = ft_strsplit(e->line, ' ');
 		e->x = -1;
 		while (++e->x < e->p.lenx)
-			e->a[e->i++] = new_point(e, e->tab[e->x]);
+			e->a[i++] = new_point(e, e->tab[e->x]);
 		e->y++;
 		free(e->tab);
 		e->tab = NULL;
