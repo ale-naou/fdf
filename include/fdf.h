@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 17:01:38 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 22:21:25 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,21 @@ typedef struct		s_img
 
 typedef struct		s_reset
 {
-	int				xres;
-	int				yres;
-	float			hres;
-	int				scaleres;
-	int				divres;
+	int				x;
+	int				y;
+	float			h;
+	int				scale;
+	int				div;
 
 }					t_reset;
+
+typedef struct		s_args
+{	
+	int				fd;
+	char			*file;
+	int				winx;
+	int				winy;
+}					t_args;
 
 typedef struct		s_env
 {
@@ -70,8 +78,6 @@ typedef struct		s_env
 	int				ret;
 	int				x;
 	int				y;
-	int				winx;
-	int				winy;
 	float			orix;
 	float			oriy;
 	int				tmpx;
@@ -89,11 +95,12 @@ typedef struct		s_env
 	t_img			img;
 	t_infos			inf;
 	t_reset			res;
+	t_args			arg;
 }					t_env;
 
 
 void		error(int c);
-void		parsing(t_env *v, char *av);
+void		parsing(t_env *e, char *av);
 void		draw(t_env *e);
 void		img_init(t_env *e);
 void		img_pixel_put(t_env *e, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:48:17 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/10 18:26:23 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 22:19:58 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	iso_init(t_env *e)
 
 void	backup(t_env *e)
 {
-	e->res.xres = e->orix;
-	e->res.yres = e->oriy;
-	e->res.hres = e->inf.h;
-	e->res.scaleres = e->inf.scale;
-	e->res.divres = e->div;
+	e->res.x = e->orix;
+	e->res.y = e->oriy;
+	e->res.h = e->inf.h;
+	e->res.scale = e->inf.scale;
+	e->res.div = e->div;
 }

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 17:01:29 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 22:21:19 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	valuesdisplay(t_env *e)
 	int x;
 	int y;
 
-	x = e->winx - 150;
-	y = e->winy - 100;
+	x = e->arg.winx - 150;
+	y = e->arg.winy - 100;
 	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
 	mlx_string_put(e->mlx, e->win, x + 75, y, 0xFFFFFF, ft_itoa(e->orix));
 	mlx_string_put(e->mlx, e->win, x, y + 20, 0xFFFFFF, "oriy = ");
@@ -34,8 +34,8 @@ void	optionsdisplay(t_env *e)
 	int		x;
 	int		y;
 
-	x = e->winx / 50;
-	y = e->winy / 50;
+	x = e->arg.winx / 50;
+	y = e->arg.winy / 50;
 	if ((e->inf.show % 2) == 0)
 		mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, 
 					"Use [o] to show options");

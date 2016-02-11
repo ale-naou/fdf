@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:09:45 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 16:34:21 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 21:13:43 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	move(int key, t_env *e)
 
 static void	reset(t_env *e)
 {
-	e->orix = e->res.xres;
-	e->oriy = e->res.yres;
-	e->inf.h = e->res.hres;
-	e->inf.scale = e->res.scaleres;
-	e->div = e->res.divres;
+	e->orix = e->res.x;
+	e->oriy = e->res.y;
+	e->inf.h = e->res.h;
+	e->inf.scale = e->res.scale;
+	e->div = e->res.div;
 }
 
 int		keyfnc(int key, t_env *e)

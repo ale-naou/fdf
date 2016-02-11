@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 16:30:39 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/11 22:17:19 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ static int		first_read(t_env *e, char *av)
 
 	i = 0;
 	imax = 0;
-	if ((e->fd = open(av, O_RDWR)) == -1)
+	if ((e->arg.fd = open (av, O_RDWR)) == -1)
 		error(3);
-	while ((e->ret = ft_get_next_line(e->fd, &e->line)) == 1)
+	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		i = str_len(e->line);
 		if (i > imax)
 			imax = i;
 		e->p.leny++;
 	}
-	if (close(e->fd) == -1)
+	if (close(e->arg.fd) == -1)
 		error(4);
 	return (imax * e->p.leny);
 }
@@ -82,13 +82,11 @@ void			parsing(t_env *e, char *av)
 	init_parser(e);
 	e->p.lenmax = first_read(e, av);
 	e->p.lenx = e->p.lenmax / e->p.leny;
-	e->fd = 0;
-	e->ret = 0;
-	if ((e->fd = open(av, O_RDWR)) == -1)
-		error(3);
 	if (!(e->a = (t_axis **)malloc(sizeof(t_axis *) * e->p.lenmax)))
 		error(5);
-	while ((e->ret = ft_get_next_line(e->fd, &e->line)) == 1)
+	if ((e->arg.fd = open (av, O_RDWR)) == -1)
+		error(3);
+	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		e->tab = ft_strsplit(e->line, ' ');
 		e->x = -1;
@@ -98,6 +96,6 @@ void			parsing(t_env *e, char *av)
 		free(e->tab);
 		e->tab = NULL;
 	}
-	if (close(e->fd) == -1)
+	if (close(e->arg.fd) == -1)
 		error(4);
 }
