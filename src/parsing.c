@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 22:17:19 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/12 12:10:21 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ static int		str_len(char *line)
 	return (len);
 }
 
-static int		first_read(t_env *e, char *av)
+static int		first_read(t_env *e)
 {
 	int		i;
 	int		imax;
 
 	i = 0;
 	imax = 0;
-	if ((e->arg.fd = open (av, O_RDWR)) == -1)
-		error(3);
 	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		i = str_len(e->line);
@@ -80,7 +78,7 @@ void			parsing(t_env *e, char *av)
 
 	i = 0;
 	init_parser(e);
-	e->p.lenmax = first_read(e, av);
+	e->p.lenmax = first_read(e);
 	e->p.lenx = e->p.lenmax / e->p.leny;
 	if (!(e->a = (t_axis **)malloc(sizeof(t_axis *) * e->p.lenmax)))
 		error(5);

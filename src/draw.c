@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/11 22:22:49 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/12 13:33:20 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ static void	draw_line(t_env *e)
 	c = -1;
 	m = abs(dh) > abs(dl) ? abs(dh) : abs (dl);
 	while (++c < m)
+	{
+		if ((e->tmpx >= e->arg.winx && e->tmpx2 >= e->arg.winx) ||
+			(e->tmpy >= e->arg.winy	&& e->tmpy2 >= e->arg.winy) ||
+			e->tmpx < 0 || e->tmpx2 < 0 || e->tmpy < 0 || e->tmpy2 < 0)
+			break;
 		img_pixel_put(e, e->orix + e->tmpx + (c * dh) / m, 
-						e->oriy + e->tmpy + (c * dl) / m, 0xFF0000);
+					e->oriy + e->tmpy + (c * dl) / m, 0xFF0000);
+	}
 }
 
 void		draw(t_env *e)
