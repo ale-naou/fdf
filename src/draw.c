@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/12 13:33:20 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/12 18:51:33 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,12 @@ static void	draw_line(t_env *e)
 	m = abs(dh) > abs(dl) ? abs(dh) : abs (dl);
 	while (++c < m)
 	{
-		if ((e->tmpx >= e->arg.winx && e->tmpx2 >= e->arg.winx) ||
-			(e->tmpy >= e->arg.winy	&& e->tmpy2 >= e->arg.winy) ||
-			e->tmpx < 0 || e->tmpx2 < 0 || e->tmpy < 0 || e->tmpy2 < 0)
+		if (((e->tmpx + e->orix) > e->arg.winx && 
+			(e->tmpx2 + e->orix) >= e->arg.winx) ||
+			((e->tmpy + e->oriy) > e->arg.winy && 
+			(e->tmpy2 + e->oriy) >= e->arg.winy) ||
+			(((e->tmpx + e->orix) < 0 && (e->tmpx2 + e->orix) < 0) || 
+			((e->tmpy + e->oriy) < 0 && (e->tmpy2 + e->oriy) < 0)))
 			break;
 		img_pixel_put(e, e->orix + e->tmpx + (c * dh) / m, 
 					e->oriy + e->tmpy + (c * dl) / m, 0xFF0000);
@@ -87,7 +90,7 @@ void		draw(t_env *e)
 			iso_converth(e);
 			draw_line(e); 
 		}
-		if (e->inc + e->p.lenx + 1 <= e->p.lenmax)
+		if (e->inc + e->p.lenx < e->p.lenmax)
 		{
 			iso_convertv(e);
 			draw_line(e);

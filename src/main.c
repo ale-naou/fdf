@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/12 13:33:23 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/12 18:51:31 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	read_args(t_env *e, int ac, char **av)
 	}
 	e->arg.winx = (e->arg.winx < 420 || e->arg.winx > 2560 ? 600 : e->arg.winx);
 	e->arg.winy = (e->arg.winy < 420 || e->arg.winy > 1440 ? 600 : e->arg.winy);
-	e->win = mlx_new_window(e->mlx, e->arg.winx, e->arg.winy, "fdf");
+	e->win = mlx_new_window(e->mlx, e->arg.winx, e->arg.winy, e->arg.file);
 }
 
 static void	aff_help(void)
