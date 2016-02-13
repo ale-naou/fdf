@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/12 18:51:33 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 15:24:35 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	valuesdisplay(t_env *e)
 	mlx_string_put(e->mlx, e->win, x + 75, y, 0xFFFFFF, ft_itoa(e->orix));
 	mlx_string_put(e->mlx, e->win, x, y + 20, 0xFFFFFF, "oriy = ");
 	mlx_string_put(e->mlx, e->win, x + 75, y += 20, 0xFFFFFF, ft_itoa(e->oriy));
-//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
-//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
-//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
-//	mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, "orix = ");
 }
 
 void	optionsdisplay(t_env *e)
@@ -74,28 +70,28 @@ static void	draw_line(t_env *e)
 			((e->tmpy + e->oriy) < 0 && (e->tmpy2 + e->oriy) < 0)))
 			break;
 		img_pixel_put(e, e->orix + e->tmpx + (c * dh) / m, 
-					e->oriy + e->tmpy + (c * dl) / m, 0xFF0000);
+					e->oriy + e->tmpy + (c * dl) / m, color(e));
 	}
 }
 
 void		draw(t_env *e)
 {
-	e->inc = 0;
+	e->i = 0;
 	img_init(e);
-	while (e->inc + 1 < e->p.lenmax)
+	while (e->i + 1 < e->p.lenmax)
 	{
 		iso_init(e);
-		if (e->a[e->inc]->y == e->a[e->inc + 1]->y)
+		if (e->a[e->i]->y == e->a[e->i + 1]->y)
 		{
 			iso_converth(e);
 			draw_line(e); 
 		}
-		if (e->inc + e->p.lenx < e->p.lenmax)
+		if (e->i + e->p.lenx < e->p.lenmax)
 		{
 			iso_convertv(e);
 			draw_line(e);
 		}
-		e->inc++;
+		e->i++;
 	}
 	mlx_hook(e->win, 2, 1, keyfnc, e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.adr, 0, 0);

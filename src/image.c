@@ -6,34 +6,22 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 15:24:51 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/12 18:28:55 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 15:23:30 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	img_pixel_put(t_env *e, int x, int y, int color)
+void	img_pixel_put(t_env *e, int x, int y, int *color)
 {
 	int pos;
-	int	zlenmax;
 
-	zlenmax = abs(e->p.zmin) + abs(e->p.zmax);
-	if (x < e->arg.winx && y < e->arg.winy && x >= 0 && y >= 0)
-	{
-		if (e->a[e->inc]->z != 0 || e->a[e->inc + 1]->z != 0)
-		{
-			pos = (x * e->img.opp) + (y * e->img.sl);	
-			e->img.img[pos] = 255;
-			e->img.img[pos + 1] = 255;
-			e->img.img[pos + 2] = 255;
-		}
-		else
-		{
-			pos = (x * e->img.opp) + (y * e->img.sl);	
-			e->img.img[pos] = color % 256;
-			e->img.img[pos + 1] = (color / 256) % 256;
-			e->img.img[pos + 2] = ((color / 256) / 256) % 256;		
-		}
+	if (e->a[e->i]->z != 0 || e->a[e->i + 1]->z != 0)
+	{	
+		pos = (x * e->img.opp) + (y * e->img.sl);	
+		e->img.img[pos] = color[0];
+		e->img.img[pos + 1] = color[1];
+		e->img.img[pos + 2] = color[2];
 	}
 }
 

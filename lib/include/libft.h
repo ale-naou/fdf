@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 17:35:41 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/01/31 13:01:28 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 14:52:05 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_strdel(char **as);
 void	ft_strclr(char *s);
 void	ft_striter(char *s, void (*f)(char *));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+int		ft_str_to_hex(char *c);
 char	*ft_itoa(int n);
 char	*ft_strnew(size_t size);
 char	*ft_strjoin(const char *s1, const char *s2);

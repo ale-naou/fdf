@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/12 18:51:31 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 15:11:42 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,26 @@ static void	read_args(t_env *e, int ac, char **av)
 			e->arg.winx = ft_atoi(av[i + 1]);
 			e->arg.winy = ft_atoi(av[i + 2]);
 		}
+		if (ft_strcmp(av[i], "-p") == 0 && i + 1 < ac)
+			e->arg.pal = ft_strdup(av[i + 1]);
 	}
 	e->arg.winx = (e->arg.winx < 420 || e->arg.winx > 2560 ? 600 : e->arg.winx);
 	e->arg.winy = (e->arg.winy < 420 || e->arg.winy > 1440 ? 600 : e->arg.winy);
 	e->win = mlx_new_window(e->mlx, e->arg.winx, e->arg.winy, e->arg.file);
+	pal_init(e);
 }
 
 static void	aff_help(void)
 {
 	ft_putchar('	');
-	ft_putendl("Usage : ./fdf mapname.fdf [-ws window size]");
+	ft_putendl("Usage : ./fdf mapname.fdf [-ws window size] [-p palette]");
 	ft_putchar('	');
 	ft_putendl("[-ws] : [window width] [window height]");
+	ft_putchar('	');
+	ft_putendl("         [max = 2560]   [max = 1440]");
+	ft_putchar('	');
+	ft_putendl("[-p]  :  palette path");
+	
 	exit(0);
 }
 
@@ -59,7 +67,7 @@ int			main(int ac, char **av)
 
 	e.inf.h = 0.2;
 	e.div = 2;
-	if (ac == 2 || ac == 5)
+	if (ac >= 2 && ac <= 7)
 	{
 		if (ft_strcmp(av[1], "-help") == 0)
 		{	
@@ -70,9 +78,10 @@ int			main(int ac, char **av)
 		init_env(&e);
 		read_args(&e, ac, av);
 		parsing(&e, av[1]);
-		e.inf.scale = 2 ;
+		e.inf.scale = (((e.arg.winx + e.arg.winy) / (e.p.lenx + e.p.leny)) / 2);
+		e.inf.scale = e.inf.scale <= 0 ? e.inf.scale = 0.8 : e.inf.scale;
 		e.orix = e.arg.winx / 2;
-		e.oriy = e.arg.winy / 5;
+		e.oriy = e.arg.winy / e.p.leny;
 		backup(&e);
 		draw(&e);
 		mlx_loop(e.mlx);

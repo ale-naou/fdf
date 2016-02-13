@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/12 18:51:28 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 15:23:05 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <math.h>
-# include <stdio.h> //
 
 typedef struct		s_axis
 {
@@ -68,12 +67,19 @@ typedef struct		s_args
 	char			*file;
 	int				winx;
 	int				winy;
+	char			*pal;
 }					t_args;
+
+typedef struct		s_palette
+{
+	int				pn;
+	int				cn;
+	int				**c;	
+}					t_palette;
 
 typedef struct		s_env
 {
 	int				i;
-	int				inc; //
 	int				fd;
 	int				ret;
 	int				x;
@@ -96,14 +102,17 @@ typedef struct		s_env
 	t_infos			inf;
 	t_reset			res;
 	t_args			arg;
+	t_palette		pal;
 }					t_env;
 
 
 void		error(int c);
 void		parsing(t_env *e, char *av);
 void		draw(t_env *e);
+void		pal_init(t_env *e);
+int			*color(t_env *e);
 void		img_init(t_env *e);
-void		img_pixel_put(t_env *e, int x, int y, int color);
+void		img_pixel_put(t_env *e, int x, int y, int *color);
 void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);
