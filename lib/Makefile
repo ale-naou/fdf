@@ -6,7 +6,7 @@
 #    By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/30 14:16:11 by ale-naou          #+#    #+#              #
-#    Updated: 2016/02/13 15:12:17 by ale-naou         ###   ########.fr        #
+#    Updated: 2016/02/13 18:48:05 by ale-naou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_NAME    = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c	\
 			ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c				\
 			ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c				\
 			ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c	\
-			ft_toupper.c ft_get_next_line.c ft_str_to_hex.c
+			ft_toupper.c ft_get_next_line.c ft_str_to_hex.c get_next_line.c
 
 OBJ_NAME    = $(SRC_NAME:.c=.o)
 

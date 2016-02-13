@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 15:11:42 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 20:52:08 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void init_env(t_env *e)
 	e->i = 0;
 	e->y = 0;
 	e->inf.show = 0;
+	e->pc = 0;
+	e->line = NULL;
 }
 
 static void	read_args(t_env *e, int ac, char **av)
@@ -30,6 +32,7 @@ static void	read_args(t_env *e, int ac, char **av)
 	e->arg.winy = 0;
 	if ((e->arg.fd = open(av[1], O_RDWR)) == -1)
 		error(3);
+	ft_putendl(av[1]);
 	e->arg.file = ft_strdup(av[1]);
 	while (++i < ac)
 	{
@@ -39,10 +42,12 @@ static void	read_args(t_env *e, int ac, char **av)
 			e->arg.winy = ft_atoi(av[i + 2]);
 		}
 		if (ft_strcmp(av[i], "-p") == 0 && i + 1 < ac)
-			e->arg.pal = ft_strdup(av[i + 1]);
+			e->arg.pal_name = ft_strdup(av[i + 1]);
 	}
 	e->arg.winx = (e->arg.winx < 420 || e->arg.winx > 2560 ? 600 : e->arg.winx);
 	e->arg.winy = (e->arg.winy < 420 || e->arg.winy > 1440 ? 600 : e->arg.winy);
+	e->arg.pal_name == NULL ? e->arg.pal_name = 
+						ft_strdup("palettes/defaultcolor") : 0;
 	e->win = mlx_new_window(e->mlx, e->arg.winx, e->arg.winy, e->arg.file);
 	pal_init(e);
 }

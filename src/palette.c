@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 13:43:25 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 15:19:32 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 20:52:04 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int		*color(t_env *e)
 	if (!(color = (int *)malloc (sizeof(int) * 3)))
 		error(3);
 	pch = set_index(e);
-	color[0] = (e->pal.c[e->pc][pch] % 256)
+	color[0] = (e->pal.c[e->pc][pch] % 256);
 	color[1] = ((e->pal.c[e->pc][pch] >> 8) % 256);
 	color[2] = ((e->pal.c[e->pc][pch] >> 16) % 256);
+	return (color);
 }
 
 void	pal_init(t_env *e)
@@ -44,13 +45,17 @@ void	pal_init(t_env *e)
 	char 	*line;
 
 	i = 0;
-	if ((fd = open(e->arg.pal, O_RDWR) == -1))
+	fd = 0;
+	line = NULL;
+	if ((fd = open(e->arg.pal_name, O_RDONLY)) == -1)
 		error(3);
 	ft_get_next_line(fd, &line);
+	ft_putendl(line);
 	if ((e->pal.pn = ft_atoi(line)) == 0)
 		error(3);
 	ft_strdel(&line);
 	ft_get_next_line(fd, &line);
+	ft_putendl(line);
 	if ((e->pal.cn = ft_atoi(line)) == 0)
 		error(3);
 	ft_strdel(&line);

@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:09:45 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 13:00:10 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 20:52:07 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void	reset(t_env *e)
 
 int		keyfnc(int key, t_env *e)
 {
+	printf("%d", key);
+	if (key == 35)
+		e->pc = e->pc <= e->pal.cn ? e->pc++ : 0;
 	if (key == 31)
 		e->inf.show++;
 	if (key == 53)

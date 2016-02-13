@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 15:23:05 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 20:52:10 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdio.h>
 
 typedef struct		s_axis
 {
@@ -67,7 +68,7 @@ typedef struct		s_args
 	char			*file;
 	int				winx;
 	int				winy;
-	char			*pal;
+	char			*pal_name;
 }					t_args;
 
 typedef struct		s_palette
@@ -84,6 +85,7 @@ typedef struct		s_env
 	int				ret;
 	int				x;
 	int				y;
+	int				pc;
 	float			orix;
 	float			oriy;
 	int				tmpx;

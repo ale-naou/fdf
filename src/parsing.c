@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 14:23:11 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/13 19:59:45 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int		first_read(t_env *e)
 
 	i = 0;
 	imax = 0;
-	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
+	while (get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		i = str_len(e->line);
 		if (i > imax)
@@ -84,7 +84,7 @@ void			parsing(t_env *e, char *av)
 		error(5);
 	if ((e->arg.fd = open (av, O_RDWR)) == -1)
 		error(3);
-	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
+	while (get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		e->tab = ft_strsplit(e->line, ' ');
 		e->x = -1;
