@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 19:59:45 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/14 13:15:01 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void			parsing(t_env *e, char *av)
 		free(e->tab);
 		e->tab = NULL;
 	}
+	e->p.zlenmax = e->p.zmax - e->p.zmin;
 	if (close(e->arg.fd) == -1)
 		error(4);
 }

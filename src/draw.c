@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:17:13 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 20:01:21 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/14 14:54:21 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ static void	draw_line(t_env *e)
 void		draw(t_env *e)
 {
 	e->i = 0;
+	ft_putendl("Appel draw");
 	img_init(e);
+	ft_putendl("initialisation img");
 	while (e->i + 1 < e->p.lenmax)
 	{
 		iso_init(e);
@@ -93,8 +95,12 @@ void		draw(t_env *e)
 		}
 		e->i++;
 	}
+	ft_putendl("Sortie draw map");
 	mlx_hook(e->win, 2, 1, keyfnc, e);
+	ft_putendl("Sortie keyHook");
 	mlx_put_image_to_window(e->mlx, e->win, e->img.adr, 0, 0);
+	ft_putendl("Put image to window");
 	optionsdisplay(e);
+	ft_putendl("Display options");
 	mlx_loop(e->mlx);
 }

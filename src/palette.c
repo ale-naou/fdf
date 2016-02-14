@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 13:43:25 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 20:52:04 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/14 14:54:15 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	set_index(t_env *e)
 	int		percent;
 	int		index;
 
-	percent = ((e->p.zmax - e->a[e->i]->z) * 100);
+	percent = ((e->p.zmax + 1 - e->a[e->i]->z) * 100) / e->p.zlenmax;
 	index = (percent * e->pal.cn) / 100;
-	index = e->pal.cn - index;
+	index = (e->pal.cn - index);
 	return (index > 0 ? index - 1 : 0);
 }
 
@@ -50,12 +50,10 @@ void	pal_init(t_env *e)
 	if ((fd = open(e->arg.pal_name, O_RDONLY)) == -1)
 		error(3);
 	ft_get_next_line(fd, &line);
-	ft_putendl(line);
 	if ((e->pal.pn = ft_atoi(line)) == 0)
 		error(3);
 	ft_strdel(&line);
 	ft_get_next_line(fd, &line);
-	ft_putendl(line);
 	if ((e->pal.cn = ft_atoi(line)) == 0)
 		error(3);
 	ft_strdel(&line);

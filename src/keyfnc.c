@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:09:45 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 20:52:07 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/14 14:54:17 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void scale(int key, t_env *e)
 {
 	if (e->inf.scale > 1)
-		e->inf.scale = key == 78 ? e->inf.scale - 1 : e->inf.scale;
-	e->inf.scale = key == 69 ? e->inf.scale + 1 : e->inf.scale;
+		e->inf.scale = key == 78 ? e->inf.scale - 0.2 : e->inf.scale;
+	e->inf.scale = key == 69 ? e->inf.scale + 0.2 : e->inf.scale;
 	e->inf.h = key == 121 ? e->inf.h - 0.2 : e->inf.h;
 	e->inf.h = key == 116 ? e->inf.h + 0.2 : e->inf.h;
 }
@@ -45,11 +45,21 @@ int		keyfnc(int key, t_env *e)
 {
 	printf("%d", key);
 	if (key == 35)
-		e->pc = e->pc <= e->pal.cn ? e->pc++ : 0;
+	{
+		e->pc = e->pc <= e->pal.cn ? e->pc++ : 1;
+		pal_init(e);
+		mlx_destroy_image(e->mlx, e->img.adr);
+		draw(e);
+	}
 	if (key == 31)
 		e->inf.show++;
 	if (key == 53)
+	{
+		mlx_destroy_image(e->mlx, e->img.adr);
+		mlx_clear_window(e->mlx, e->win);
+		mlx_destroy_window(e->mlx, e->win);
 		exit (0);
+	}
 	if ((key >= 123 && key <= 126) || key == 86 || key == 88)
 		move(key, e);
 	if (key == 69 || key == 78 || key == 121 || key == 116)

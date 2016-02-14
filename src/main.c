@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 20:52:08 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/14 14:54:19 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	read_args(t_env *e, int ac, char **av)
 	e->arg.winy = 0;
 	if ((e->arg.fd = open(av[1], O_RDWR)) == -1)
 		error(3);
-	ft_putendl(av[1]);
 	e->arg.file = ft_strdup(av[1]);
 	while (++i < ac)
 	{
@@ -72,24 +71,27 @@ int			main(int ac, char **av)
 
 	e.inf.h = 0.2;
 	e.div = 2;
+	ft_putendl("Entree Main");
 	if (ac >= 2 && ac <= 7)
 	{
 		if (ft_strcmp(av[1], "-help") == 0)
-		{	
-			ft_putendl("Debug main 2");
 			aff_help();
-		}
 		e.mlx = mlx_init();
+		ft_putendl("Initilisation mlx");
 		init_env(&e);
+		ft_putendl("Initialisation struct");
 		read_args(&e, ac, av);
+		ft_putendl("Sortie Lecture args");
 		parsing(&e, av[1]);
+		ft_putendl("Sortie parsing");
 		e.inf.scale = (((e.arg.winx + e.arg.winy) / (e.p.lenx + e.p.leny)) / 2);
 		e.inf.scale = e.inf.scale <= 0 ? e.inf.scale = 0.8 : e.inf.scale;
 		e.orix = e.arg.winx / 2;
 		e.oriy = e.arg.winy / e.p.leny;
 		backup(&e);
+		ft_putendl("Initilisation backup");
 		draw(&e);
-		mlx_loop(e.mlx);
+		ft_putendl("Sortie Draw");
 	}
 	else
 		aff_help();

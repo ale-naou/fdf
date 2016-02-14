@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/13 20:52:10 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/14 13:08:18 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_pars
 	int				lenmax;
 	int				zmin;
 	int				zmax;
+	int				zlenmax;
 }					t_pars;
 
 typedef struct		s_infos
