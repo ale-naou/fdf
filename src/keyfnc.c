@@ -6,11 +6,12 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:09:45 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/14 14:54:17 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 14:55:04 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h> //
 
 static void scale(int key, t_env *e)
 {
@@ -43,16 +44,10 @@ static void	reset(t_env *e)
 
 int		keyfnc(int key, t_env *e)
 {
-	printf("%d", key);
-	if (key == 35)
-	{
-		e->pc = e->pc <= e->pal.cn ? e->pc++ : 1;
-		pal_init(e);
-		mlx_destroy_image(e->mlx, e->img.adr);
-		draw(e);
-	}
 	if (key == 31)
 		e->inf.show++;
+	if (key == 35)
+		e->pal_num = e->pal_num <= 5 ? e->pal_num + 1 : 0;
 	if (key == 53)
 	{
 		mlx_destroy_image(e->mlx, e->img.adr);

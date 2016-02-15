@@ -6,69 +6,82 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 13:43:25 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/14 14:54:15 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 15:15:57 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	set_index(t_env *e)
+static void	p_bicolor2(t_env *e, int x, int y)
 {
-	int		percent;
-	int		index;
+	int pos;
 
-	percent = ((e->p.zmax + 1 - e->a[e->i]->z) * 100) / e->p.zlenmax;
-	index = (percent * e->pal.cn) / 100;
-	index = (e->pal.cn - index);
-	return (index > 0 ? index - 1 : 0);
-}
-
-int		*color(t_env *e)
-{
-	int		pch;
-	int		*color;
-
-	if (!(color = (int *)malloc (sizeof(int) * 3)))
-		error(3);
-	pch = set_index(e);
-	color[0] = (e->pal.c[e->pc][pch] % 256);
-	color[1] = ((e->pal.c[e->pc][pch] >> 8) % 256);
-	color[2] = ((e->pal.c[e->pc][pch] >> 16) % 256);
-	return (color);
-}
-
-void	pal_init(t_env *e)
-{
-	int		i;
-	int		j;
-	int		fd;
-	char 	*line;
-
-	i = 0;
-	fd = 0;
-	line = NULL;
-	if ((fd = open(e->arg.pal_name, O_RDONLY)) == -1)
-		error(3);
-	ft_get_next_line(fd, &line);
-	if ((e->pal.pn = ft_atoi(line)) == 0)
-		error(3);
-	ft_strdel(&line);
-	ft_get_next_line(fd, &line);
-	if ((e->pal.cn = ft_atoi(line)) == 0)
-		error(3);
-	ft_strdel(&line);
-	if (!(e->pal.c = (int **)malloc(sizeof(int) * e->pal.cn)))
-		error(3);
-	while (i < e->pal.pn)
+	if (x >= 0 && y >= 0 && x < e->arg.winx && y < e->arg.winy)
 	{
-		if (!(e->pal.c[i] = (int *)malloc(sizeof(int) * 3)))
-			error(3);
-		j = 0;
-		while (ft_get_next_line(fd, &line) == 1 && j < e->pal.cn)
-			e->pal.c[i][j++] = ft_str_to_hex(line);
-		i++;
+		if (e->a[e->i]->z <= e->p.zstep)
+		{
+			pos = (x * e->img.opp) + (y * e->img.sl);
+			e->img.img[pos] = 255;
+			e->img.img[pos + 1] = 255;
+			e->img.img[pos + 2] = 0;
+		}
+		else
+		{
+			pos = (x * e->img.opp) + (y * e->img.sl);
+			e->img.img[pos] = 0;
+			e->img.img[pos + 1] = 255;
+			e->img.img[pos + 2] = 255;
+		}
 	}
-	if (close(fd) == -1)
-		error(4);
-	ft_strdel(&line);
+}
+
+void	palette_bicolor(t_env *e, int x, int y)
+{
+	int pos;
+
+	if (x >= 0 && y >= 0 && x < e->arg.winx && y < e->arg.winy)
+	{
+		if (e->pal_num == 2)
+		{
+			if (e->a[e->i]->z <= e->p.zstep)
+			{
+				pos = (x * e->img.opp) + (y * e->img.sl);
+				e->img.img[pos] = 255;
+				e->img.img[pos + 1] = 255;
+				e->img.img[pos + 2] = 255;
+			}
+			else
+			{
+				pos = (x * e->img.opp) + (y * e->img.sl);
+				e->img.img[pos] = 255;
+				e->img.img[pos + 1] = 0;
+				e->img.img[pos + 2] = 255;
+			}
+		}
+		else
+			p_bicolor2(e, x, y);
+	}
+}
+
+void	palette_mono(t_env *e, int x, int y)
+{
+	int pos;
+
+	if (x >= 0 && y >= 0 && x < e->arg.winx && y < e->arg.winy)
+	{
+		if (e->pal_num == 0)
+		{
+			pos = (x * e->img.opp) + (y * e->img.sl);
+			e->img.img[pos] = 255;
+			e->img.img[pos + 1] = 255;
+			e->img.img[pos + 2] = 255;
+		}
+		else if (e->pal_num == 1)
+		{
+			pos = (x * e->img.opp) + (y * e->img.sl);
+			e->img.img[pos] = 0;
+			e->img.img[pos + 1] = 255;
+			e->img.img[pos + 2] = 0;
+		}
+	}
 }

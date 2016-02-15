@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/14 13:08:18 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 14:39:59 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_pars
 	int				zmin;
 	int				zmax;
 	int				zlenmax;
+	int				zstep;
 }					t_pars;
 
 typedef struct		s_infos
@@ -58,7 +59,7 @@ typedef struct		s_reset
 	int				x;
 	int				y;
 	float			h;
-	int				scale;
+	float			scale;
 	int				div;
 
 }					t_reset;
@@ -72,13 +73,6 @@ typedef struct		s_args
 	char			*pal_name;
 }					t_args;
 
-typedef struct		s_palette
-{
-	int				pn;
-	int				cn;
-	int				**c;	
-}					t_palette;
-
 typedef struct		s_env
 {
 	int				i;
@@ -86,7 +80,7 @@ typedef struct		s_env
 	int				ret;
 	int				x;
 	int				y;
-	int				pc;
+	int				pal_num;
 	float			orix;
 	float			oriy;
 	int				tmpx;
@@ -105,17 +99,16 @@ typedef struct		s_env
 	t_infos			inf;
 	t_reset			res;
 	t_args			arg;
-	t_palette		pal;
 }					t_env;
 
 
 void		error(int c);
 void		parsing(t_env *e, char *av);
 void		draw(t_env *e);
-void		pal_init(t_env *e);
-int			*color(t_env *e);
 void		img_init(t_env *e);
-void		img_pixel_put(t_env *e, int x, int y, int *color);
+void		img_pixel_put(t_env *e, int x, int y);
+void		palette_mono(t_env *e, int x, int y);
+void		palette_bicolor(t_env *e, int x, int y);
 void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);

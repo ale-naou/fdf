@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/14 14:54:19 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 15:15:56 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void init_env(t_env *e)
 	e->i = 0;
 	e->y = 0;
 	e->inf.show = 0;
-	e->pc = 0;
 	e->line = NULL;
+	e->pal_num = 0;
 }
 
 static void	read_args(t_env *e, int ac, char **av)
@@ -40,15 +40,10 @@ static void	read_args(t_env *e, int ac, char **av)
 			e->arg.winx = ft_atoi(av[i + 1]);
 			e->arg.winy = ft_atoi(av[i + 2]);
 		}
-		if (ft_strcmp(av[i], "-p") == 0 && i + 1 < ac)
-			e->arg.pal_name = ft_strdup(av[i + 1]);
 	}
 	e->arg.winx = (e->arg.winx < 420 || e->arg.winx > 2560 ? 600 : e->arg.winx);
 	e->arg.winy = (e->arg.winy < 420 || e->arg.winy > 1440 ? 600 : e->arg.winy);
-	e->arg.pal_name == NULL ? e->arg.pal_name = 
-						ft_strdup("palettes/defaultcolor") : 0;
 	e->win = mlx_new_window(e->mlx, e->arg.winx, e->arg.winy, e->arg.file);
-	pal_init(e);
 }
 
 static void	aff_help(void)
@@ -71,27 +66,20 @@ int			main(int ac, char **av)
 
 	e.inf.h = 0.2;
 	e.div = 2;
-	ft_putendl("Entree Main");
 	if (ac >= 2 && ac <= 7)
 	{
 		if (ft_strcmp(av[1], "-help") == 0)
 			aff_help();
 		e.mlx = mlx_init();
-		ft_putendl("Initilisation mlx");
 		init_env(&e);
-		ft_putendl("Initialisation struct");
 		read_args(&e, ac, av);
-		ft_putendl("Sortie Lecture args");
 		parsing(&e, av[1]);
-		ft_putendl("Sortie parsing");
 		e.inf.scale = (((e.arg.winx + e.arg.winy) / (e.p.lenx + e.p.leny)) / 2);
-		e.inf.scale = e.inf.scale <= 0 ? e.inf.scale = 0.8 : e.inf.scale;
+		e.inf.scale = e.inf.scale <= 0 ? 0.8 : e.inf.scale;
 		e.orix = e.arg.winx / 2;
 		e.oriy = e.arg.winy / e.p.leny;
 		backup(&e);
-		ft_putendl("Initilisation backup");
 		draw(&e);
-		ft_putendl("Sortie Draw");
 	}
 	else
 		aff_help();

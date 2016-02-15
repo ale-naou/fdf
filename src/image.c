@@ -6,22 +6,43 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 15:24:51 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/14 13:20:21 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 15:15:53 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	img_pixel_put(t_env *e, int x, int y, int *color)
+void	img_pixel_put(t_env *e, int x, int y)
 {
 	int pos;
 
 	if (x >= 0 && y >= 0 && x < e->arg.winx && y < e->arg.winy)
 	{
-		pos = (x * e->img.opp) + (y * e->img.sl);	
-		e->img.img[pos] = color[0];
-		e->img.img[pos + 1] = color[1];
-		e->img.img[pos + 2] = color[2];
+		if (e->pal_num == 0 || e->pal_num == 1)
+			palette_mono(e, x, y);
+		else if (e->pal_num == 2 || e->pal_num == 3)
+			palette_bicolor(e, x, y);
+		else if (e->a[e->i]->z == 0)
+		{
+			pos = (x * e->img.opp) + (y * e->img.sl);	
+			e->img.img[pos] = 100;
+			e->img.img[pos + 1] = 100;
+			e->img.img[pos + 2] = 100;
+		}
+		else if (e->a[e->i]->z > 0)
+		{	
+			pos = (x * e->img.opp) + (y * e->img.sl);	
+			e->img.img[pos] = 0;
+			e->img.img[pos + 1] = 255;
+			e->img.img[pos + 2] = 0;
+		}
+		else
+		{
+			pos = (x * e->img.opp) + (y * e->img.sl);	
+			e->img.img[pos] = 255;
+			e->img.img[pos + 1] = 255;
+			e->img.img[pos + 2] = 255;
+		}
 	}
 }
 

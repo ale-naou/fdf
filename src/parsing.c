@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/14 13:15:01 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 15:15:54 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ static int		str_len(char *line)
 		if (line[i] >= '0' && line[i] <= '9' &&
 			(line[i + 1] == ' ' || line[i + 1] == '\0'))
 			len++;
+		else if ((line[i] < '0' || line[i] > '9') &&
+				line[i] != '-' && line[i] != ' ')
+			error(3);
 		i++;
 	}
 	return (len);
@@ -60,7 +63,7 @@ static int		first_read(t_env *e)
 
 	i = 0;
 	imax = 0;
-	while (get_next_line(e->arg.fd, &e->line) == 1)
+	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		i = str_len(e->line);
 		if (i > imax)
@@ -84,7 +87,7 @@ void			parsing(t_env *e, char *av)
 		error(5);
 	if ((e->arg.fd = open (av, O_RDWR)) == -1)
 		error(3);
-	while (get_next_line(e->arg.fd, &e->line) == 1)
+	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
 	{
 		e->tab = ft_strsplit(e->line, ' ');
 		e->x = -1;
@@ -94,7 +97,8 @@ void			parsing(t_env *e, char *av)
 		free(e->tab);
 		e->tab = NULL;
 	}
-	e->p.zlenmax = e->p.zmax - e->p.zmin;
+	e->p.zlenmax = abs(e->p.zmax) + abs(e->p.zmin);
+	e->p.zstep = e->p.zlenmax / 2;
 	if (close(e->arg.fd) == -1)
 		error(4);
 }
