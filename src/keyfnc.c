@@ -6,14 +6,13 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:09:45 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/15 14:55:04 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 22:11:05 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h> //
 
-static void scale(int key, t_env *e)
+static void	scale(int key, t_env *e)
 {
 	if (e->inf.scale > 1)
 		e->inf.scale = key == 78 ? e->inf.scale - 0.2 : e->inf.scale;
@@ -29,7 +28,7 @@ static void	move(int key, t_env *e)
 	e->oriy = key == 126 ? e->oriy - 10 : e->oriy;
 	e->oriy = key == 125 ? e->oriy + 10 : e->oriy;
 	e->div = key == 86 ? e->div + 1 : e->div;
-	if (e->div > 1) 
+	if (e->div > 1)
 		e->div = key == 88 ? e->div - 1 : e->div;
 }
 
@@ -42,7 +41,7 @@ static void	reset(t_env *e)
 	e->div = e->res.div;
 }
 
-int		keyfnc(int key, t_env *e)
+int			keyfnc(int key, t_env *e)
 {
 	if (key == 31)
 		e->inf.show++;
@@ -53,7 +52,7 @@ int		keyfnc(int key, t_env *e)
 		mlx_destroy_image(e->mlx, e->img.adr);
 		mlx_clear_window(e->mlx, e->win);
 		mlx_destroy_window(e->mlx, e->win);
-		exit (0);
+		exit(0);
 	}
 	if ((key >= 123 && key <= 126) || key == 86 || key == 88)
 		move(key, e);

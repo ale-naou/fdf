@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 15:48:17 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/15 13:52:07 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 22:34:54 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	iso_converth(t_env *e)
 				(e->a[e->i + 1]->z * e->inf.scale) * e->inf.h;
 	e->tmpx2 = e->tmpx2 - e->tmpy2;
 	e->tmpy2 = (e->tmpx2 + e->tmpy2) / e->div +
-				e->a[e->i + 1]->y *e->inf.scale;
+				e->a[e->i + 1]->y * e->inf.scale;
 }
 
 void	iso_init(t_env *e)

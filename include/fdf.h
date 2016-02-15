@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:09:04 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/15 14:39:59 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 21:23:42 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef struct		s_img
 
 typedef struct		s_reset
 {
-	int				x;
-	int				y;
 	float			h;
 	float			scale;
+	int				x;
+	int				y;
 	int				div;
 
 }					t_reset;
@@ -67,27 +67,27 @@ typedef struct		s_reset
 typedef struct		s_args
 {	
 	int				fd;
-	char			*file;
 	int				winx;
 	int				winy;
+	char			*file;
 	char			*pal_name;
 }					t_args;
 
 typedef struct		s_env
 {
+	float			orix;
+	float			oriy;
+	float			div;
 	int				i;
 	int				fd;
 	int				ret;
 	int				x;
 	int				y;
 	int				pal_num;
-	float			orix;
-	float			oriy;
 	int				tmpx;
 	int				tmpy;
 	int				tmpx2;
 	int				tmpy2;
-	float			div;
 	char			*line;
 	char			**tab;
 	char			*tmp;
@@ -108,7 +108,7 @@ void		draw(t_env *e);
 void		img_init(t_env *e);
 void		img_pixel_put(t_env *e, int x, int y);
 void		palette_mono(t_env *e, int x, int y);
-void		palette_bicolor(t_env *e, int x, int y);
+void		palette_bicolor(t_env *e, int x, int y, int z);
 void		iso_init(t_env *e);
 void		iso_converth(t_env *e);
 void		iso_convertv(t_env *e);

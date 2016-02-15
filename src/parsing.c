@@ -6,7 +6,7 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 17:09:31 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/15 15:15:54 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 22:04:34 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void		init_parser(t_env *e)
 static t_axis	*new_point(t_env *e, char *tab)
 {
 	t_axis *new;
-	
+
 	if (!(new = (t_axis *)malloc(sizeof(t_axis))))
 		return (NULL);
 	new->x = e->x;
 	new->y = e->y;
-	new->z = ft_atoi(tab);
-	e->p.zmin = (new->z < e->p.zmin ? new->z : e->p.zmin);		
+	new->z = tab != NULL ? ft_atoi(tab) : 0;
+	e->p.zmin = (new->z < e->p.zmin ? new->z : e->p.zmin);
 	e->p.zmax = (new->z > e->p.zmax ? new->z : e->p.zmax);
 	ft_strdel(&tab);
 	return (new);
@@ -50,7 +50,7 @@ static int		str_len(char *line)
 			len++;
 		else if ((line[i] < '0' || line[i] > '9') &&
 				line[i] != '-' && line[i] != ' ')
-			error(3);
+			error(1);
 		i++;
 	}
 	return (len);
@@ -70,6 +70,8 @@ static int		first_read(t_env *e)
 			imax = i;
 		e->p.leny++;
 	}
+	if (e->line == NULL)
+		ft_putendl("coucou");
 	if (close(e->arg.fd) == -1)
 		error(4);
 	return (imax * e->p.leny);
@@ -85,7 +87,7 @@ void			parsing(t_env *e, char *av)
 	e->p.lenx = e->p.lenmax / e->p.leny;
 	if (!(e->a = (t_axis **)malloc(sizeof(t_axis *) * e->p.lenmax)))
 		error(5);
-	if ((e->arg.fd = open (av, O_RDWR)) == -1)
+	if ((e->arg.fd = open(av, O_RDWR)) == -1)
 		error(3);
 	while (ft_get_next_line(e->arg.fd, &e->line) == 1)
 	{

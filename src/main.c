@@ -6,13 +6,13 @@
 /*   By: ale-naou <ale-naou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 13:12:43 by ale-naou          #+#    #+#             */
-/*   Updated: 2016/02/15 15:15:56 by ale-naou         ###   ########.fr       */
+/*   Updated: 2016/02/15 22:34:53 by ale-naou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void init_env(t_env *e)
+static void	init_env(t_env *e)
 {
 	e->fd = 0;
 	e->ret = 0;
@@ -20,13 +20,13 @@ static void init_env(t_env *e)
 	e->y = 0;
 	e->inf.show = 0;
 	e->line = NULL;
-	e->pal_num = 0;
+	e->pal_num = 3;
 }
 
 static void	read_args(t_env *e, int ac, char **av)
 {
 	int		i;
-	
+
 	i = -1;
 	e->arg.winx = 0;
 	e->arg.winy = 0;
@@ -56,7 +56,6 @@ static void	aff_help(void)
 	ft_putendl("         [max = 2560]   [max = 1440]");
 	ft_putchar('	');
 	ft_putendl("[-p]  :  palette path");
-	
 	exit(0);
 }
 
